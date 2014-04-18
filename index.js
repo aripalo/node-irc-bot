@@ -3,7 +3,7 @@ var irc = require("irc");
 var config  = require('./config.json');
 
 
-// helper for checking if someone is a bot admin
+// Helper for checking if someone is a bot admin
 function isAdmin(someone) {
 
   if (Array.isArray(config.admins) && config.admins.some(function(value) { return someone.indexOf(value) >= 0; })) {
@@ -19,7 +19,7 @@ function isAdmin(someone) {
 }
 
 
-
+// Function for checking if a nich is on channel's auto-op list
 function isInAutoop(channel, nick) {
 
   var autoop;
@@ -44,9 +44,8 @@ function isInAutoop(channel, nick) {
 }
 
 
-
 // command handler
-// http://fahad19.tumblr.com/post/39920378753/running-an-irc-bot-with-nodejs-locally
+// stolen from: http://fahad19.tumblr.com/post/39920378753/running-an-irc-bot-with-nodejs-locally
 function commandHandler(client, from, to, text, message) {
   if (text && text.length > 2 && text[0] == '!') {
     var sendTo = from; // send privately
@@ -88,8 +87,7 @@ function commandHandler(client, from, to, text, message) {
       }
 
     } else if (fs.existsSync('./commands/' + command + '.js')) { // check if we have an command file
-      var commandFunc = require('./commands/' + command + '.js');
-      var output = commandFunc(client, from, to, text, message);
+      var output = require('./commands/' + command + '.js')(client, from, to, text, message);
       if (output) {
         client.say(sendTo, output);
       }
@@ -98,6 +96,7 @@ function commandHandler(client, from, to, text, message) {
     }
   }
 };
+
 
 // listener handler
 function listenerHandler(client, from, to, text, message) {
@@ -122,23 +121,24 @@ function listenerHandler(client, from, to, text, message) {
 // Instatiate the client
 var client = new irc.Client(config.server, config.userName, config);
 
+
 // Check when registered to IRC server
 client.addListener("registered", function() {
   console.log("Bot is now registered with the server "+config.server);
 });
+
 
 // Error handler
 client.addListener('error', function(message) {
   console.log('error: ', message);
 });
 
+
 // Listen for messages
 client.addListener('message', function(from, to, text, message) {
   commandHandler(client, from, to, text, message);
   listenerHandler(client, from, to, text, message);
 });
-
-
 
 
 // Listen for joins
@@ -159,7 +159,6 @@ client.addListener("join", function(channel, nick, message) {
     if (isAdmin(message.prefix) || isInAutoop(channel, nick)) {
       client.send('MODE', channel, '+o', nick);
     }
-
 
   } else {
     // do stuff when the bot itself joins...
