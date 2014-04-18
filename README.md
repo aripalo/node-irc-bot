@@ -31,7 +31,7 @@ FEATURES
 - Bot can have 1 or many admins
 - Auto-op bot admin (requires the bot to have `+o` of course)
 - Auto-op users defined in `./autoop.json`. **WARNING**: Auto-op is nick based so use cautiously (if at all)!
-
+- Optional per channel greetings for newly joined user defined in `./greetings.json`
 
 
 

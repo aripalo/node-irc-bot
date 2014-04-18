@@ -152,7 +152,7 @@ client.addListener("join", function(channel, nick, message) {
 
   if (nick != config.userName) {
     // do stuff when other people join
-    if (greetings != undefined && typeof greetings[channel] == "string") {
+    if (greetings != undefined && typeof greetings[channel] == "string" && greetings[channel].length > 1) {
       client.say(channel, nick+': '+greetings[channel]);
     }
 
