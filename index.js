@@ -112,11 +112,19 @@ client.addListener('message', function(from, to, text, message) {
 
 
 // Listen for joins
-client.addListener("join", function(channel, who) {
+client.addListener("join", function(channel, nick, message) {
 
-  if (who != config.userName) {
+  if (nick != config.userName) {
     // do stuff when other people join
-    client.say(channel, who + " WADDUP?!");
+    client.say(channel, nick + " WADDUP?!");
+
+    console.log(message);
+
+    if (isAdmin(message.prefix)) {
+      client.send('MODE', channel, '+o', nick);
+    }
+
+
   } else {
     // do stuff when the bot itself joins...
   }
