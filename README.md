@@ -23,7 +23,7 @@ TODO
 - save runtime configs to file
 
 
-FEATURES
+Features
 --------
 - Send commands to the bot with `!`-prefix
 - Attach listeners that react to certain situations (such as keywords etc)
@@ -35,13 +35,15 @@ FEATURES
 
 
 
-BASE ACTIONS
-------------
+Core commands
+-------------
 - `!reload` - (admin only)
 - `!quit` - (admin only)
 
-Example configurable actions
-----------------------------
+Configurable/Example commands
+-----------------------------
+Found in `./commands`-folder.
+
 - `!google` - returns a google search link. *TODO*: return links to first N results
 - `!wiki` - *TODO* search wikipedia
 - `!so` - *TODO* search stackoverflow
