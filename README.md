@@ -1,6 +1,11 @@
 IRCbot with node
 ================
 
+**WORK IN PROGRESS!!!**
+
+
+
+
 Built on top of [Node-IRC](https://github.com/martynsmith/node-irc)-module.
 
 
@@ -13,10 +18,9 @@ TODO
   - op a person on channel,
   - deop a person on channel
   - say something on a channel
-- auto-op master
-- reboot functionality (reads all configs etc again)
 - enable/disable "annoyances"
-
+- reboot functionality (reads all configs etc again)
+- save runtime configs to file
 
 
 FEATURES
@@ -26,7 +30,7 @@ FEATURES
 - Add new functionality (commands and listeners) on the fly without rebooting the bot!
 - Bot can have 1 or many admins
 - Auto-op bot admin (requires the bot to have `+o` of course)
-- Auto-op users defined in `./autoop.json`. **WARNING**: Auto-op is nick based so use cautiously!
+- Auto-op users defined in `./autoop.json`. **WARNING**: Auto-op is nick based so use cautiously (if at all)!
 
 
 
