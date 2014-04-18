@@ -1,9 +1,7 @@
 IRCbot with node
 ================
 
-Based on
-- https://github.com/martynsmith/node-irc
-- http://fahad19.tumblr.com/post/39920378753/running-an-irc-bot-with-nodejs-locally
+Built on top of [Node-IRC](https://github.com/martynsmith/node-irc)-module.
 
 
 TODO
@@ -16,26 +14,19 @@ TODO
   - deop a person on channel
   - say something on a channel
 - auto-op master
-- separate configuration to a config.json file (which needs to be in gitignore)
 - reboot functionality (reads all configs etc again)
-- reload commands
 - enable/disable "annoyances"
-- remove hardcoded values from the source (such as master name, bot's nick etc)
-- add nice helpers, such as:
-  - google search [return links to first N resuls]
-  - search wikipedia
-  - search stackoverflow
-  - search a funny developer gif
-  - search fron bukkit
+
 
 
 FEATURES
 --------
-- Commands: Send commands to the bot with `!`-prefix
-- Listeners: Attach listeners that react to certain situations (such as keywords etc)
-- Bot can have 1 or many admins
+- Send commands to the bot with `!`-prefix
+- Attach listeners that react to certain situations (such as keywords etc)
 - Add new functionality (commands and listeners) on the fly without rebooting the bot!
-
+- Bot can have 1 or many admins
+- Auto-op bot admin (requires the bot to have `+o` of course)
+- Auto-op users defined in `./autoop.json`. **WARNING**: Auto-op is nick based so use cautiously!
 
 
 
@@ -44,3 +35,10 @@ BASE ACTIONS
 ------------
 - `!reload` - (admin only)
 - `!quit` - (admin only)
+
+Example configurable actions
+----------------------------
+- `!google` - returns a google search link. *TODO*: return links to first N results
+- `!wiki` - *TODO* search wikipedia
+- `!so` - *TODO* search stackoverflow
+- `!gif` - *TODO* search some gifs... (not sure if I can actually implement this in sane manner)

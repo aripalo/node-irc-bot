@@ -1,7 +1,7 @@
 var fs = require('fs');
 var irc = require("irc");
 var config  = require('./config.json');
-
+var autoop  = require('./autoop.json');
 
 // helper for checking if someone is a bot admin
 function isAdmin(someone) {
@@ -14,6 +14,22 @@ function isAdmin(someone) {
     return true;
   } else {
     // not an admin or no admins specified in config
+    return false;
+  }
+}
+
+
+
+function isInAutoop(channel, nick) {
+
+  if (Array.isArray(autoop[channel]) && autoop[channel].some(function(value) { return nick.toLowerCase().indexOf(value.toLowerCase()) >= 0; })) {
+    // autoop[channel] is array and there's at least one match
+    return true;
+  } else if (typeof autoop[channel] == "string" && autoop[channel].toLowerCase() == nick.toLowerCase()) {
+    // autoop[channel] is a string and it is a match
+    return true;
+  } else {
+    // no matches
     return false;
   }
 }
@@ -118,9 +134,7 @@ client.addListener("join", function(channel, nick, message) {
     // do stuff when other people join
     client.say(channel, nick + " WADDUP?!");
 
-    console.log(message);
-
-    if (isAdmin(message.prefix)) {
+    if (isAdmin(message.prefix) || isInAutoop(channel, nick)) {
       client.send('MODE', channel, '+o', nick);
     }
 
