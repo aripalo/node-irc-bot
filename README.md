@@ -18,7 +18,7 @@ TODO
 - auto-op master
 - separate configuration to a config.json file (which needs to be in gitignore)
 - reboot functionality (reads all configs etc again)
-- reload actions
+- reload commands
 - enable/disable "annoyances"
 - remove hardcoded values from the source (such as master name, bot's nick etc)
 - add nice helpers, such as:
@@ -31,10 +31,10 @@ TODO
 
 FEATURES
 --------
-- Actions: Send commands to the bot with `!`-prefix
+- Commands: Send commands to the bot with `!`-prefix
 - Listeners: Attach listeners that react to certain situations (such as keywords etc)
 - Bot can have 1 or many admins
-- Add new functionality (actions and listeners) on the fly without rebooting the bot!
+- Add new functionality (commands and listeners) on the fly without rebooting the bot!
 
 
 

@@ -20,34 +20,34 @@ function isAdmin(someone) {
 
 
 
-// action handler
+// command handler
 // http://fahad19.tumblr.com/post/39920378753/running-an-irc-bot-with-nodejs-locally
-function actionHandler(client, from, to, text, message) {
+function commandHandler(client, from, to, text, message) {
   if (text && text.length > 2 && text[0] == '!') {
     var sendTo = from; // send privately
     if (to.indexOf('#') > -1) {
       sendTo = to; // send publicly
     }
 
-    var action = String(text.split(' ')[0]).replace('!', '');
+    var command = String(text.split(' ')[0]).replace('!', '');
 
-    if (action.trim() == "reload") {
+    if (command.trim() == "reload") {
 
       if (isAdmin(message.prefix)) {
 
-        fs.readdirSync('./actions/').forEach(function (file) {
-          delete require.cache[require.resolve('./actions/'+file)];
+        fs.readdirSync('./commands/').forEach(function (file) {
+          delete require.cache[require.resolve('./commands/'+file)];
         });
         fs.readdirSync('./listeners/').forEach(function (file) {
           delete require.cache[require.resolve('./listeners/'+file)];
         });
-        client.say(sendTo, 'Actions and listeneres are now reloaded!');
+        client.say(sendTo, 'Commands and listeneres are now reloaded!');
 
       } else {
         client.say(sendTo, 'Sorry mate, only bot admin can do that!');
       }
 
-    } else if (action.trim() == "quit") {
+    } else if (command.trim() == "quit") {
 
       if (isAdmin(message.prefix)) {
         client.disconnect("As you wish m'lord!", function(){
@@ -57,14 +57,14 @@ function actionHandler(client, from, to, text, message) {
         client.say(sendTo, 'Sorry mate, only bot admin can do that!');
       }
 
-    } else if (fs.existsSync('./actions/' + action + '.js')) { // check if we have an action file
-      var actionFunc = require('./actions/' + action + '.js');
-      var output = actionFunc(client, from, to, text, message);
+    } else if (fs.existsSync('./commands/' + command + '.js')) { // check if we have an command file
+      var commandFunc = require('./commands/' + command + '.js');
+      var output = commandFunc(client, from, to, text, message);
       if (output) {
         client.say(sendTo, output);
       }
     } else {
-      client.say(sendTo, 'unknown action');
+      client.say(sendTo, 'unknown command');
     }
   }
 };
@@ -104,7 +104,7 @@ client.addListener('error', function(message) {
 
 // Listen for messages
 client.addListener('message', function(from, to, text, message) {
-  actionHandler(client, from, to, text, message);
+  commandHandler(client, from, to, text, message);
   listenerHandler(client, from, to, text, message);
 });
 
