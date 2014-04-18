@@ -8,8 +8,7 @@ Based on
 
 TODO
 ----
-- ACL: masters vs all users
-- reload command to acl
+
 - take commands from master, such as:
   - join channel,
   - leave channel,
@@ -32,4 +31,14 @@ TODO
 
 FEATURES
 --------
-- reload bot actions
+- Bot can have 1 or many admins
+- Add new functionality on the fly without rebooting the bot!
+
+
+
+
+
+BASE ACTIONS
+------------
+- `!reload` - (admin only)
+- `!quit` - (admin only)

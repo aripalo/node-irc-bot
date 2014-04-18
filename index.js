@@ -13,6 +13,7 @@ function isAdmin(someone) {
     // config.admin is a string and it is a match
     return true;
   } else {
+    // not an admin or no admins specified in config
     return false;
   }
 }
@@ -33,7 +34,18 @@ function actionHandler(client, from, to, text, message) {
     if (action.trim() == "reload") {
 
       if (isAdmin(message.prefix)) {
+        delete require.cache[require.resolve('./actions/google.js')];
         client.say(sendTo, 'Actions are reloaded!');
+      } else {
+        client.say(sendTo, 'Sorry mate, only bot admin can do that!');
+      }
+
+    } else if (action.trim() == "quit") {
+
+      if (isAdmin(message.prefix)) {
+        client.disconnect("As you wish m'lord!", function(){
+          process.exit();
+        });
       } else {
         client.say(sendTo, 'Sorry mate, only bot admin can do that!');
       }
