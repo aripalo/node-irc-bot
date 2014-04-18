@@ -1,15 +1,18 @@
 {
-  "name": "ircbot",
-  "version": "0.0.0",
-  "description": "",
+  "name": "node-irc-bot",
+  "description": "IRC bot made with NodeJS. Just for fun.",
+  "version": "0.0.1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "@aripalo",
   "license": "ISC",
   "dependencies": {
     "irc": "^0.3.6",
     "lodash": "^2.4.1"
+  },
+  "engines": {
+    "node": ">=0.10.16"
   }
 }

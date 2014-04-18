@@ -1,0 +1,21 @@
+{
+  "admins": ["Nickname!username@host"],
+  "server": "irc.freenode.net",
+  "userName": "changethis",
+  "realName": "Someone's NodeJS IRC bot",
+  "port": 6667,
+  "debug": false,
+  "showErrors": false,
+  "autoRejoin": true,
+  "autoConnect": true,
+  "channels": ["#Node.js"],
+  "secure": false,
+  "selfSigned": false,
+  "certExpired": false,
+  "floodProtection": false,
+  "floodProtectionDelay": 1000,
+  "sasl": false,
+  "stripColors": false,
+  "channelPrefixes": "&#",
+  "messageSplit": 512
+}

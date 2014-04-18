@@ -1,9 +1,21 @@
+/*
+ * NodeJS IRC bot
+ * =============================================================================
+ * by @aripalo
+ *
+ */
+
+
+
 var fs = require('fs');
 var irc = require("irc");
 var config  = require('./config.json');
 
 
-// Helper for checking if someone is a bot admin
+/*
+ * Helper to check if "someone" is actually a bot admin
+ * -----------------------------------------------------------------------------
+ */
 function isAdmin(someone) {
 
   if (Array.isArray(config.admins) && config.admins.some(function(value) { return someone.indexOf(value) >= 0; })) {
@@ -19,7 +31,10 @@ function isAdmin(someone) {
 }
 
 
-// Function for checking if a nich is on channel's auto-op list
+/*
+ * Helper for checking if a nich is on channel's auto-op list
+ * -----------------------------------------------------------------------------
+ */
 function isInAutoop(channel, nick) {
 
   var autoop;
@@ -43,9 +58,40 @@ function isInAutoop(channel, nick) {
 
 }
 
+/*
+ * Helper for reloading modules
+ * -----------------------------------------------------------------------------
+ * http://stackoverflow.com/a/15666221
+ *
+ * This function doesn't "reload" anything,
+ * it just clears stuff from the require.cache so that other functions
+ * will actually get the changed modules from the disk
+ */
+function clearModuleCaches() {
 
-// command handler
-// stolen from: http://fahad19.tumblr.com/post/39920378753/running-an-irc-bot-with-nodejs-locally
+  fs.readdirSync('./commands/').forEach(function (file) {
+    delete require.cache[require.resolve('./commands/'+file)];
+  });
+
+  fs.readdirSync('./listeners/').forEach(function (file) {
+    delete require.cache[require.resolve('./listeners/'+file)];
+  });
+
+  delete require.cache[require.resolve('./autoop.json')];
+  delete require.cache[require.resolve('./greetings.json')];
+
+  // returns a message for the IRC bot to send to the admin user who called !reload
+  return 'Commands, listeneres, greeting lists and auto-op lists are now reloaded!';
+
+};
+
+
+/*
+ * Command handler
+ * -----------------------------------------------------------------------------
+ * stolen from:
+ * http://fahad19.tumblr.com/post/39920378753/running-an-irc-bot-with-nodejs-locally
+ */
 function commandHandler(client, from, to, text, message) {
   if (text && text.length > 2 && text[0] == '!') {
     var sendTo = from; // send privately
@@ -58,20 +104,7 @@ function commandHandler(client, from, to, text, message) {
     if (command.trim() == "reload") {
 
       if (isAdmin(message.prefix)) {
-
-        fs.readdirSync('./commands/').forEach(function (file) {
-          delete require.cache[require.resolve('./commands/'+file)];
-        });
-
-        fs.readdirSync('./listeners/').forEach(function (file) {
-          delete require.cache[require.resolve('./listeners/'+file)];
-        });
-
-        delete require.cache[require.resolve('./autoop.json')];
-        delete require.cache[require.resolve('./greetings.json')];
-
-        client.say(sendTo, 'Commands, listeneres, greeting lists and auto-op lists are now reloaded!');
-
+        client.say(sendTo, clearModuleCaches());
       } else {
         client.say(sendTo, 'Sorry mate, only bot admin can do that!');
       }
@@ -98,7 +131,10 @@ function commandHandler(client, from, to, text, message) {
 };
 
 
-// listener handler
+/*
+ * Listener handler
+ * -----------------------------------------------------------------------------
+ */
 function listenerHandler(client, from, to, text, message) {
 
   if (text && text.length > 2 && text[0] != '!') {
@@ -118,7 +154,10 @@ function listenerHandler(client, from, to, text, message) {
 };
 
 
-// Instatiate the client
+/*
+ * Instatiate the client and add listeners
+ * -----------------------------------------------------------------------------
+ */
 var client = new irc.Client(config.server, config.userName, config);
 
 
@@ -136,8 +175,13 @@ client.addListener('error', function(message) {
 
 // Listen for messages
 client.addListener('message', function(from, to, text, message) {
+
+  //handles commands starting with "!""
   commandHandler(client, from, to, text, message);
+
+  //listens for certain keywords on conversatios etc and acts on them
   listenerHandler(client, from, to, text, message);
+
 });
 
 
@@ -152,10 +196,13 @@ client.addListener("join", function(channel, nick, message) {
 
   if (nick != config.userName) {
     // do stuff when other people join
+
+    // if greetins.json configured, then greet the newly joined user
     if (greetings != undefined && typeof greetings[channel] == "string" && greetings[channel].length > 1) {
       client.say(channel, nick+': '+greetings[channel]);
     }
 
+    // auto-op bot admin and optionally configured users on autoop.json
     if (isAdmin(message.prefix) || isInAutoop(channel, nick)) {
       client.send('MODE', channel, '+o', nick);
     }
