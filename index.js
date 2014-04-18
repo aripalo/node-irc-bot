@@ -69,6 +69,25 @@ function actionHandler(client, from, to, text, message) {
   }
 };
 
+// listener handler
+function listenerHandler(client, from, to, text, message) {
+
+  if (text && text.length > 2 && text[0] != '!') {
+    var sendTo = from; // send privately
+    if (to.indexOf('#') > -1) {
+      sendTo = to; // send publicly
+    }
+
+    fs.readdirSync('./listeners/').forEach(function (file) {
+      var output = require('./listeners/' + file)(client, from, to, text, message);
+      if (output) {
+        client.say(sendTo, output);
+      }
+    });
+
+  }
+};
+
 
 // Instatiate the client
 var client = new irc.Client(config.server, config.userName, config);
@@ -86,6 +105,7 @@ client.addListener('error', function(message) {
 // Listen for messages
 client.addListener('message', function(from, to, text, message) {
   actionHandler(client, from, to, text, message);
+  listenerHandler(client, from, to, text, message);
 });
 
 
