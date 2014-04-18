@@ -1,4 +1,4 @@
-var action = function(client, from, to, text, message) {
+module.exports = function(client, from, to, text, message) {
 
 
   var q = text.split(/ (.+)/)[1];
@@ -9,4 +9,3 @@ var action = function(client, from, to, text, message) {
   return 'http://google.com/search?q=' + escape(q);
 };
 
-module.exports = action;
