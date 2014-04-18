@@ -22,7 +22,13 @@ function isAdmin(someone) {
 
 function isInAutoop(channel, nick) {
 
-  var autoop  = require('./autoop.json');
+  var autoop;
+
+  if (!fs.existsSync('./autoop.json')) { return false; }
+
+  autoop  = require('./autoop.json');
+
+  if (autoop == undefined) { return false; }
 
   if (Array.isArray(autoop[channel]) && autoop[channel].some(function(value) { return nick.toLowerCase().indexOf(value.toLowerCase()) >= 0; })) {
     // autoop[channel] is array and there's at least one match
@@ -34,6 +40,7 @@ function isInAutoop(channel, nick) {
     // no matches
     return false;
   }
+
 }
 
 
@@ -62,8 +69,9 @@ function commandHandler(client, from, to, text, message) {
         });
 
         delete require.cache[require.resolve('./autoop.json')];
+        delete require.cache[require.resolve('./greetings.json')];
 
-        client.say(sendTo, 'Commands, listeneres and auto-op lists are now reloaded!');
+        client.say(sendTo, 'Commands, listeneres, greeting lists and auto-op lists are now reloaded!');
 
       } else {
         client.say(sendTo, 'Sorry mate, only bot admin can do that!');
@@ -136,9 +144,17 @@ client.addListener('message', function(from, to, text, message) {
 // Listen for joins
 client.addListener("join", function(channel, nick, message) {
 
+  var greetings;
+
+  if (fs.existsSync('./greetings.json')) {
+    greetings = require('./greetings.json');
+  }
+
   if (nick != config.userName) {
     // do stuff when other people join
-    client.say(channel, nick + " WADDUP?!");
+    if (greetings != undefined && typeof greetings[channel] == "string") {
+      client.say(channel, nick+': '+greetings[channel]);
+    }
 
     if (isAdmin(message.prefix) || isInAutoop(channel, nick)) {
       client.send('MODE', channel, '+o', nick);
