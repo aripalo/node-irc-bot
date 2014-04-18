@@ -38,7 +38,10 @@ function actionHandler(client, from, to, text, message) {
         fs.readdirSync('./actions/').forEach(function (file) {
           delete require.cache[require.resolve('./actions/'+file)];
         });
-        client.say(sendTo, 'Actions are reloaded!');
+        fs.readdirSync('./listeners/').forEach(function (file) {
+          delete require.cache[require.resolve('./listeners/'+file)];
+        });
+        client.say(sendTo, 'Actions and listeneres are now reloaded!');
 
       } else {
         client.say(sendTo, 'Sorry mate, only bot admin can do that!');
