@@ -31,8 +31,10 @@ TODO
 
 FEATURES
 --------
+- Actions: Send commands to the bot with `!`-prefix
+- Listeners: Attach listeners that react to certain situations (such as keywords etc)
 - Bot can have 1 or many admins
-- Add new functionality on the fly without rebooting the bot!
+- Add new functionality (actions and listeners) on the fly without rebooting the bot!
 
 
 
