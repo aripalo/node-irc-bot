@@ -1,7 +1,7 @@
 var fs = require('fs');
 var irc = require("irc");
 var config  = require('./config.json');
-var autoop  = require('./autoop.json');
+
 
 // helper for checking if someone is a bot admin
 function isAdmin(someone) {
@@ -21,6 +21,8 @@ function isAdmin(someone) {
 
 
 function isInAutoop(channel, nick) {
+
+  var autoop  = require('./autoop.json');
 
   if (Array.isArray(autoop[channel]) && autoop[channel].some(function(value) { return nick.toLowerCase().indexOf(value.toLowerCase()) >= 0; })) {
     // autoop[channel] is array and there's at least one match
@@ -54,10 +56,14 @@ function commandHandler(client, from, to, text, message) {
         fs.readdirSync('./commands/').forEach(function (file) {
           delete require.cache[require.resolve('./commands/'+file)];
         });
+
         fs.readdirSync('./listeners/').forEach(function (file) {
           delete require.cache[require.resolve('./listeners/'+file)];
         });
-        client.say(sendTo, 'Commands and listeneres are now reloaded!');
+
+        delete require.cache[require.resolve('./autoop.json')];
+
+        client.say(sendTo, 'Commands, listeneres and auto-op lists are now reloaded!');
 
       } else {
         client.say(sendTo, 'Sorry mate, only bot admin can do that!');
