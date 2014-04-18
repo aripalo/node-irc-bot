@@ -34,8 +34,12 @@ function actionHandler(client, from, to, text, message) {
     if (action.trim() == "reload") {
 
       if (isAdmin(message.prefix)) {
-        delete require.cache[require.resolve('./actions/google.js')];
+
+        fs.readdirSync('./actions/').forEach(function (file) {
+          delete require.cache[require.resolve('./actions/'+file)];
+        });
         client.say(sendTo, 'Actions are reloaded!');
+
       } else {
         client.say(sendTo, 'Sorry mate, only bot admin can do that!');
       }
