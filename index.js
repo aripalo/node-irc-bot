@@ -131,9 +131,9 @@ function commandHandler(client, from, to, text, message) {
     if (command.trim() == 'say') {
 
       if (text.split(' ')[1].indexOf('#') > -1) {
-        client.say(text.split(' ')[1], text.split(' ')[2]);
+        client.say(text.split(' ')[1], text.substring(String(text.split(' ')[0]).length + 1 + String(text.split(' ')[1]).length) );
       } else {
-        client.say(channel, text.split(' ')[1]);
+        client.say(channel, text.substring(String(text.split(' ')[0]).length));
       }
 
     } else if (command.trim() == 'part') {
