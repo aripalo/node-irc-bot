@@ -13,6 +13,7 @@ module.exports = function(client, from, to, text, message) {
   var querystring = require('querystring');
 
   var q = text.split(/ (.+)/)[1];
+
   if (!q || q.length == 0) {
     return 'no keyword given, mate';
   }
@@ -48,7 +49,6 @@ module.exports = function(client, from, to, text, message) {
     return results;
   }
 
-
   needle.get('http://www.google.com/custom?q='+querystring.escape(q), defaultHeaders, function(error, response, body) {
     var results = parseString(body);
 
@@ -66,7 +66,6 @@ module.exports = function(client, from, to, text, message) {
       );
 
   });
-
 
 };
 
