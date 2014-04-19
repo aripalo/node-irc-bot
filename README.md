@@ -19,8 +19,8 @@ Features
 
 Core commands
 -------------
-- `!help`
-- `!reload` - (admin only)
+- `!help` - prints list of available commands
+- `!reload` - Reloads commands, listeneres, greeting lists and auto-op lists (admin only)
 - `!quit` - (admin only)
 
 
