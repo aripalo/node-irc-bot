@@ -23,6 +23,8 @@ Core commands
 - `!reload` - Reloads commands, observeres, greeting lists and auto-op lists (admin only)
 - `!quit` - (admin only)
 - `!mode <channel> <command> <nick>` - E.g. op some one: `!mode #channel +o nick` which would send `/mode #channel +o nick`
+- `!join <channel>`
+- `!wc`
 
 
 Configurable/Example commands
@@ -38,10 +40,6 @@ More TODO
 ---------
 
 - take commands from master, such as:
-  - join channel,
-  - leave channel,
-  - op a person on channel,
-  - deop a person on channel
   - say something on a channel
 - enable/disable "annoyances" (basically silly observers)
 

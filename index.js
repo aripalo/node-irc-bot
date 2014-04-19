@@ -120,15 +120,29 @@ function clearModuleCaches() {
 function commandHandler(client, from, to, text, message) {
   if (text && text.length > 2 && text[0] == '!') {
     var sendTo = from; // send privately
+    var channel = "";
     if (to.indexOf('#') > -1) {
       sendTo = to; // send publicly
+      channel = sendTo;
     }
 
     var command = String(text.split(' ')[0]).replace('!', '');
 
-    if (command.trim() == 'mode') {
+    if (command.trim() == 'part') {
 
-      client.send('MODE', String(text.split(' ')[1]), String(text.split(' ')[2]), String(text.split(' ')[3]);
+      if (text.split(' ')[1].indexOf('#') > -1) {
+        client.part(text.split(' ')[1]);
+      } else {
+        client.part(channel);
+      }
+
+    } else if (command.trim() == 'join') {
+
+      client.join(text.split(' ')[1]);
+
+    } else if (command.trim() == 'mode') {
+
+      client.send('MODE', String(text.split(' ')[1]), String(text.split(' ')[2]), String(text.split(' ')[3]));
 
     } else if (command.trim() == 'help') {
 
