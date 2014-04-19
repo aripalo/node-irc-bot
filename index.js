@@ -13,6 +13,20 @@ var config  = require('./config.json');
 
 
 /*
+ * String to hold !help command answer
+ * -----------------------------------------------------------------------------
+ */
+var helpString = 'The available commands are: ';
+
+helpString += '\n!reload (admin only)';
+helpString += ', !quit (admin only)';
+
+fs.readdirSync('./commands/').forEach(function (file) {
+  helpString += ', !'+file.replace(/\.js$/, '');
+});
+
+
+/*
  * Helper to check if "someone" is actually a bot admin
  * -----------------------------------------------------------------------------
  */
@@ -101,7 +115,11 @@ function commandHandler(client, from, to, text, message) {
 
     var command = String(text.split(' ')[0]).replace('!', '');
 
-    if (command.trim() == "reload") {
+    if (command.trim() == 'help') {
+
+      client.say(sendTo, helpString);
+
+    } else if (command.trim() == 'reload') {
 
       if (isAdmin(message.prefix)) {
         client.say(sendTo, clearModuleCaches());

@@ -19,6 +19,7 @@ Features
 
 Core commands
 -------------
+- `!help`
 - `!reload` - (admin only)
 - `!quit` - (admin only)
 
