@@ -8,13 +8,14 @@ Built on top of [Node-IRC](https://github.com/martynsmith/node-irc)-module.
 
 Features
 --------
-- Send commands to the bot with `!`-prefix
+- Send commands to the bot with `!`-prefix (e.g. `!google NodeJS`)
 - Attach observers that react to certain situations (such as specific keywords in conversations etc)
 - Add new functionality (commands and observers) on the fly without rebooting the bot!
 - Bot can have 1 or many admins
 - Auto-op bot admin(s). Requires the bot to have `+o` of course.
 - Auto-op users defined in `./autoop.json`. **WARNING**: Auto-op is nick based so use cautiously (if at all)!
 - Optional per channel greetings for newly joined user defined in `./greetings.json`
+- Admin can send basic IRC commands like `/mode`, `/join`, `/part` and make the bot say things
 
 
 Core commands
@@ -62,3 +63,12 @@ Adding functionality
 ### Observers
 
 ... basically the same process as with commands, but observers aren't activated by `!command`, but instead they're meant for monitoring conversation and act on them.
+
+
+
+TODO
+----
+- Refactor `index.js`, especially the `commandHandler` function
+- `!google`, `!so` and `!wiki`-commands share quite much logic, maybe refactor that logic into separate module etc?
+- Improve docs
+- Add another observer example
