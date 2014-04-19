@@ -157,26 +157,18 @@ function commandHandler(client, from, to, text, message) {
 
     var command = String(text.split(' ')[0]).replace('!', '').trim();
     var argument = text.substring(String(text.split(' ')[0]).length);
+    var messageToSend = "";
 
     if (command.trim() == 'say') {
 
       if (isAdmin(message.prefix)) {
 
-        var message = argument.substring( String(argument.trim().split(' ')[0]).length+1 ).trim();
-
-        console.log('substring argument: '+String(argument.trim().split(' ')[0]));
-        console.log('sendTo: '+sendTo);
-        console.log('argument: '+argument);
-        console.log('substring: '+ message);
-
         if (beginsWithChannelName(argument)) {
-          console.log('menee trueen');
-          client.say(sendTo, message);
-
+          messageToSend = argument.substring( String(argument.trim().split(' ')[0]).length+1 ).trim();
         } else {
-          console.log('menee falseen');
-          client.say(sendTo, argument);
+          messageToSend = argument;
         }
+        client.say(sendTo, messageToSend);
 
       }
 
