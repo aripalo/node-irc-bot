@@ -23,8 +23,9 @@ Core commands
 - `!reload` - Reloads commands, observeres, greeting lists and auto-op lists (admin only)
 - `!quit` - (admin only)
 - `!mode <channel> <command> <nick>` - E.g. op some one: `!mode #channel +o nick` which would send `/mode #channel +o nick`
-- `!join <channel>`
-- `!wc`
+- `!join <channel>` or `!join <channel> <password>` if it has one
+- `!part` if on a channel or `!part <channel>` if called elsewhere
+- `!say <something>` if on a channel or `!say <channel> <something>` if called elsewhere
 
 
 Configurable/Example commands
@@ -35,13 +36,6 @@ Found in `./commands`-folder.
 - `!wiki` - returns links to top 3 wikipedia results
 - `!so` -  returns links to top 3 stackoverflow results
 
-
-More TODO
----------
-
-- take commands from master, such as:
-  - say something on a channel
-- enable/disable "annoyances" (basically silly observers)
 
 
 Install

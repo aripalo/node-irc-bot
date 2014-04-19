@@ -128,9 +128,17 @@ function commandHandler(client, from, to, text, message) {
 
     var command = String(text.split(' ')[0]).replace('!', '');
 
-    if (command.trim() == 'part') {
+    if (command.trim() == 'say') {
 
       if (text.split(' ')[1].indexOf('#') > -1) {
+        client.say(text.split(' ')[1], text.split(' ')[2]);
+      } else {
+        client.say(channel, text.split(' ')[1]);
+      }
+
+    } else if (command.trim() == 'part') {
+
+      if (text.split(' ')[1] != undefined && text.split(' ')[1].indexOf('#') > -1) {
         client.part(text.split(' ')[1]);
       } else {
         client.part(channel);
