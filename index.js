@@ -117,7 +117,7 @@ function clearModuleCaches() {
  * stolen from:
  * http://fahad19.tumblr.com/post/39920378753/running-an-irc-bot-with-nodejs-locally
  *
- * TODO: Seriosly, refactor this awfullness!
+ * TODO: SERIOUSLY refactor this awfullness!
  */
 function commandHandler(client, from, to, text, message) {
   if (text && text.length > 2 && text[0] == '!') {
@@ -132,28 +132,31 @@ function commandHandler(client, from, to, text, message) {
 
     if (command.trim() == 'say') {
 
-      if (text.split(' ')[1].indexOf('#') > -1) {
-        client.say(text.split(' ')[1], text.substring(String(text.split(' ')[0]).length + 1 + String(text.split(' ')[1]).length) );
-      } else {
-        client.say(channel, text.substring(String(text.split(' ')[0]).length));
+      if (isAdmin(message.prefix)) {
+        if (text.split(' ')[1].indexOf('#') > -1) {
+          client.say(text.split(' ')[1], text.substring(String(text.split(' ')[0]).length + 1 + String(text.split(' ')[1]).length) );
+        } else {
+          client.say(channel, text.substring(String(text.split(' ')[0]).length));
+        }
       }
 
     } else if (command.trim() == 'part') {
-
-      if (text.split(' ')[1] != undefined && text.split(' ')[1].indexOf('#') > -1) {
-        client.part(text.split(' ')[1]);
-      } else {
-        client.part(channel);
+      if (isAdmin(message.prefix)) {
+        if (text.split(' ')[1] != undefined && text.split(' ')[1].indexOf('#') > -1) {
+          client.part(text.split(' ')[1]);
+        } else {
+          client.part(channel);
+        }
       }
 
     } else if (command.trim() == 'join') {
-
-      client.join(text.split(' ')[1]);
-
+      if (isAdmin(message.prefix)) {
+        client.join(text.split(' ')[1]);
+      }
     } else if (command.trim() == 'mode') {
-
-      client.send('MODE', String(text.split(' ')[1]), String(text.split(' ')[2]), String(text.split(' ')[3]));
-
+      if (isAdmin(message.prefix)) {
+        client.send('MODE', String(text.split(' ')[1]), String(text.split(' ')[2]), String(text.split(' ')[3]));
+      }
     } else if (command.trim() == 'help') {
 
       client.say(sendTo, helpString);
