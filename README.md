@@ -31,7 +31,6 @@ Found in `./commands`-folder.
 - `!google` - returns links to top 3 google results
 - `!wiki` - returns links to top 3 wikipedia results
 - `!so` -  returns links to top 3 stackoverflow results
-- `!gif` - *TODO* search some gifs... (not sure if I can actually implement this in sane manner)
 
 
 More TODO
