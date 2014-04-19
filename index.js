@@ -16,14 +16,24 @@ var config  = require('./config.json');
  * String to hold !help command answer
  * -----------------------------------------------------------------------------
  */
-var helpString = 'The available commands are: ';
 
-helpString += '\n!reload (admin only)';
-helpString += ', !quit (admin only)';
+var helpString = "";
 
-fs.readdirSync('./commands/').forEach(function (file) {
-  helpString += ', !'+file.replace(/\.js$/, '');
-});
+function buildHelpString() {
+
+  helpString = "";
+
+  helpString = 'The available commands are: ';
+
+  helpString += '\n!help (this command you just ran)';
+  helpString += '!reload (admin only)';
+  helpString += ', !quit (admin only)';
+
+  fs.readdirSync('./commands/').forEach(function (file) {
+    helpString += ', !'+file.replace(/\.js$/, '');
+  });
+
+};
 
 
 /*
@@ -42,7 +52,7 @@ function isAdmin(someone) {
     // not an admin or no admins specified in config
     return false;
   }
-}
+};
 
 
 /*
@@ -70,7 +80,7 @@ function isInAutoop(channel, nick) {
     return false;
   }
 
-}
+};
 
 /*
  * Helper for reloading modules
@@ -83,6 +93,7 @@ function isInAutoop(channel, nick) {
  */
 function clearModuleCaches() {
 
+  // delete stuff from require.cache
   fs.readdirSync('./commands/').forEach(function (file) {
     delete require.cache[require.resolve('./commands/'+file)];
   });
@@ -93,6 +104,9 @@ function clearModuleCaches() {
 
   delete require.cache[require.resolve('./autoop.json')];
   delete require.cache[require.resolve('./greetings.json')];
+
+  // build the help string again
+  buildHelpString();
 
   // returns a message for the IRC bot to send to the admin user who called !reload
   return 'Commands, listeneres, greeting lists and auto-op lists are now reloaded!';
@@ -182,6 +196,7 @@ var client = new irc.Client(config.server, config.userName, config);
 // Check when registered to IRC server
 client.addListener("registered", function() {
   console.log("Bot is now registered with the server "+config.server);
+  buildHelpString();
 });
 
 
