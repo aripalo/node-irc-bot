@@ -14,7 +14,7 @@ module.exports = function(client, from, to, text, message) {
     }
 
     fs.readdirSync('./observers/').forEach(function (file) {
-      var output = require('./observers/' + file)(client, from, to, text, message);
+      var output = require('../observers/' + file)(client, from, to, text, message);
       if (output) {
         client.say(sendTo, output);
       }

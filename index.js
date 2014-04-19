@@ -1,11 +1,11 @@
 var fs = require('fs');
 var irc = require("irc");
 var config  = require('./config.json');
-var commandHandler = require('./command-handler.js');
-var observerHandler = require('./observer-handler.js');
-var help = require('./help.js');
-var autoop = require('./autoop.js');
-var greetings = require('./greetings.js');
+var commandHandler = require('./modules/command-handler.js');
+var observerHandler = require('./modules/observer-handler.js');
+var help = require('./modules/help.js');
+var autoop = require('./modules/autoop.js');
+var greetings = require('./modules/greetings.js');
 
 
 

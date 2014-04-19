@@ -30,7 +30,7 @@ module.exports = function(client, from, to, text, message) {
    */
   function externalCommand(opts) {
     if (fs.existsSync('./commands/' + opts.command + '.js')) { // check if we have an command file
-      var output = require('./commands/' + opts.command + '.js')(client, from, to, text, message);
+      var output = require('../commands/' + opts.command + '.js')(client, from, to, text, message);
       if (output) {
         client.say(sendTo, output);
       }

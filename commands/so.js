@@ -1,4 +1,4 @@
-var isChannel = require('../is-channel.js');
+var isChannel = require('../modules/is-channel.js');
 
 /*
  * Stackoverflow command

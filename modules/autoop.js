@@ -8,9 +8,9 @@ function isInAutoop(channel, nick) {
 
   var autoop;
 
-  if (!fs.existsSync('./autoop.json')) { return false; }
+  if (!fs.existsSync('../autoop.json')) { return false; }
 
-  autoop  = require('./autoop.json');
+  autoop  = require('../autoop.json');
 
   if (autoop == undefined) { return false; }
 

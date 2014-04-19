@@ -14,15 +14,15 @@ module.exports = function() {
 
   // delete stuff from require.cache
   fs.readdirSync('./commands/').forEach(function (file) {
-    delete require.cache[require.resolve('./commands/'+file)];
+    delete require.cache[require.resolve('../commands/'+file)];
   });
 
   fs.readdirSync('./observers/').forEach(function (file) {
-    delete require.cache[require.resolve('./observers/'+file)];
+    delete require.cache[require.resolve('../observers/'+file)];
   });
 
-  delete require.cache[require.resolve('./autoop.json')];
-  delete require.cache[require.resolve('./greetings.json')];
+  delete require.cache[require.resolve('../autoop.json')];
+  delete require.cache[require.resolve('../greetings.json')];
 
   // build the help string again
   help.buildString();
