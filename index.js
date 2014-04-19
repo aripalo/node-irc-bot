@@ -41,21 +41,7 @@ function beginsWithChannelName(string) {
 
   var channelPrefixes = config.channelPrefixes.split('');
 
-  //console.log(channelPrefixes);
-
-  //channelPrefixes.forEach(function(element, index, array) {
-  //  array[index] = '\\'+element;
-  //});
-
-  //channelPrefixes.join("|");
-
-  //if (new RegExp(channelPrefixes).test(lowerCasedText)) {}
-
-  //if (to.indexOf('#') > -1) {}
-
   return channelPrefixes.some(function(value) { return string.trim().indexOf(value) == 0; });
-
-
 
 }
 
