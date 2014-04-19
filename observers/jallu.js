@@ -1,3 +1,11 @@
+/*
+ * Jallu-observer
+ * -----------------------------------------------------------------------------
+ * Notices when people are talking about "jallu", the great liquour from Finland,
+ * cut brandy: http://en.wikipedia.org/wiki/Cut_brandy
+ *
+ */
+
 module.exports = function(client, from, to, text, message) {
 
   var lowerCasedText = text.toLowerCase();
