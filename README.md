@@ -78,5 +78,6 @@ TODO
 - Improve docs
 - Add another observer example
 - There's quite many synchronous functions in the code, consider refactoring to asynchronous
+- Unit tests?
 - Add "spam-protection", basically a timeout for non-bot-admin users
 - After everything's cleaned up and so, consider bundling as npm module

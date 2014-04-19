@@ -1,3 +1,5 @@
+var isChannel = require('../is-channel.js');
+
 /*
  * Stackoverflow command
  * -----------------------------------------------------------------------------
@@ -53,7 +55,7 @@ module.exports = function(client, from, to, text, message) {
     var results = parseString(body);
 
     var sendTo = from; // send privately
-    if (to.indexOf('#') > -1) {
+    if (isChannel(to)) {
       sendTo = to; // send publicly
     }
 

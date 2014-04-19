@@ -1,5 +1,6 @@
+var isChannel = require('../is-channel.js');
 /*
- * Stackoverflow command
+ * Wikipedia command
  * -----------------------------------------------------------------------------
  * mostly stolen from https://www.npmjs.org/package/google-search-parser-4hype
  *
@@ -53,7 +54,7 @@ module.exports = function(client, from, to, text, message) {
     var results = parseString(body);
 
     var sendTo = from; // send privately
-    if (to.indexOf('#') > -1) {
+    if (isChannel(to)) {
       sendTo = to; // send publicly
     }
 
