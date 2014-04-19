@@ -10,7 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "irc": "^0.3.6",
-    "lodash": "^2.4.1"
+    "lodash": "^2.4.1",
+    "needle": "^0.7.0",
+    "cheerio": "^0.15.0",
+    "url": "^0.7.9"
   },
   "engines": {
     "node": ">=0.10.16"

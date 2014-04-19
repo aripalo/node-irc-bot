@@ -27,9 +27,9 @@ Configurable/Example commands
 -----------------------------
 Found in `./commands`-folder.
 
-- `!google` - returns a google search link. *TODO*: return links to first N results
+- `!google` - returns links to top 3 results
 - `!wiki` - *TODO* search wikipedia
-- `!so` - *TODO* search stackoverflow
+- `!stackoverflow` - *TODO* search stackoverflow
 - `!gif` - *TODO* search some gifs... (not sure if I can actually implement this in sane manner)
 
 
