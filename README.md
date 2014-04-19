@@ -43,3 +43,16 @@ More TODO
   - deop a person on channel
   - say something on a channel
 - enable/disable "annoyances" (basically silly listeners)
+
+
+Install
+-------
+
+1. `git clone https://github.com/aripalo/node-irc-bot.git`
+2. `node-irc-bot`
+3. `npm install`
+4. `cp example-config.json config-json`
+5. Edit the `config-json`
+6. `node index.js`
+
+
