@@ -15,7 +15,7 @@ module.exports = function(client, from, to, text, message) {
   var q = text.split(/ (.+)/)[1];
 
   if (!q || q.length == 0) {
-    return 'no keyword given, mate';
+    return 'No keyword given, can\'t really do a Google search with that. Try \'!google Jaloviina\'';
   }
 
   defaultHeaders = {
