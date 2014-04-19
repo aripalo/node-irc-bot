@@ -98,8 +98,8 @@ function clearModuleCaches() {
     delete require.cache[require.resolve('./commands/'+file)];
   });
 
-  fs.readdirSync('./listeners/').forEach(function (file) {
-    delete require.cache[require.resolve('./listeners/'+file)];
+  fs.readdirSync('./observers/').forEach(function (file) {
+    delete require.cache[require.resolve('./observers/'+file)];
   });
 
   delete require.cache[require.resolve('./autoop.json')];
@@ -109,7 +109,7 @@ function clearModuleCaches() {
   buildHelpString();
 
   // returns a message for the IRC bot to send to the admin user who called !reload
-  return 'Commands, listeneres, greeting lists and auto-op lists are now reloaded!';
+  return 'Commands, observeres, greeting lists and auto-op lists are now reloaded!';
 
 };
 
@@ -164,10 +164,10 @@ function commandHandler(client, from, to, text, message) {
 
 
 /*
- * Listener handler
+ * Observer handler
  * -----------------------------------------------------------------------------
  */
-function listenerHandler(client, from, to, text, message) {
+function observerHandler(client, from, to, text, message) {
 
   if (text && text.length > 2 && text[0] != '!') {
     var sendTo = from; // send privately
@@ -175,8 +175,8 @@ function listenerHandler(client, from, to, text, message) {
       sendTo = to; // send publicly
     }
 
-    fs.readdirSync('./listeners/').forEach(function (file) {
-      var output = require('./listeners/' + file)(client, from, to, text, message);
+    fs.readdirSync('./observers/').forEach(function (file) {
+      var output = require('./observers/' + file)(client, from, to, text, message);
       if (output) {
         client.say(sendTo, output);
       }
@@ -213,7 +213,7 @@ client.addListener('message', function(from, to, text, message) {
   commandHandler(client, from, to, text, message);
 
   //listens for certain keywords on conversatios etc and acts on them
-  listenerHandler(client, from, to, text, message);
+  observerHandler(client, from, to, text, message);
 
 });
 

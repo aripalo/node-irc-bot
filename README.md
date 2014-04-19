@@ -9,8 +9,8 @@ Built on top of [Node-IRC](https://github.com/martynsmith/node-irc)-module.
 Features
 --------
 - Send commands to the bot with `!`-prefix
-- Attach listeners that react to certain situations (such as specific keywords in conversations etc)
-- Add new functionality (commands and listeners) on the fly without rebooting the bot!
+- Attach observers that react to certain situations (such as specific keywords in conversations etc)
+- Add new functionality (commands and observers) on the fly without rebooting the bot!
 - Bot can have 1 or many admins
 - Auto-op bot admin(s). Requires the bot to have `+o` of course.
 - Auto-op users defined in `./autoop.json`. **WARNING**: Auto-op is nick based so use cautiously (if at all)!
@@ -20,7 +20,7 @@ Features
 Core commands
 -------------
 - `!help` - prints list of available commands
-- `!reload` - Reloads commands, listeneres, greeting lists and auto-op lists (admin only)
+- `!reload` - Reloads commands, observeres, greeting lists and auto-op lists (admin only)
 - `!quit` - (admin only)
 
 
@@ -42,7 +42,7 @@ More TODO
   - op a person on channel,
   - deop a person on channel
   - say something on a channel
-- enable/disable "annoyances" (basically silly listeners)
+- enable/disable "annoyances" (basically silly observers)
 
 
 Install
@@ -56,3 +56,16 @@ Install
 6. `node index.js`
 
 
+Adding functionality
+--------------------
+
+### Commands
+
+1. Add functionality wrapped into CommonJS module.exports funcion into JavaScript-file and place it to `./commands`-folder
+2. Important: The filename will be the command, e.g. `foo.js` will become command `!foo`
+3. Run `!reload`-command on as a bot admin
+4. Profit...?
+
+### Observers
+
+... basically the same process as with commands, but observers aren't activated by `!command`, but instead they're meant for monitoring conversation and act on them.
