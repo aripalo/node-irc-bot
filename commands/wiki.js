@@ -15,7 +15,7 @@ module.exports = function(client, from, to, text, message) {
   var q = text.split(/ (.+)/)[1];
 
   if (!q || q.length == 0) {
-    return 'No keyword given, can\'t really do a Stackoverflow search with that. Try \'!so NodeJS\'';
+    return 'No keyword given, can\'t really do a Wikipedia search with that. Try \'!wiki NodeJS\'';
   }
 
   defaultHeaders = {
@@ -33,13 +33,13 @@ module.exports = function(client, from, to, text, message) {
     var $ = this.$ = cheerio.load(string);
     var results = [];
 
-    $('.search-result').each(function(i, el) {
+    $('.mw-search-results > li').each(function(i, el) {
 
       el = $(el);
 
       var row = {
-        Title: el.find('.result-link a').text(),
-        URL: 'http://stackoverflow.com'+el.find('.result-link a').attr('href')
+        Title: el.find('a').text(),
+        URL: 'http://en.wikipedia.org'+el.find('a').attr('href')
       };
 
       results.push(row);
@@ -49,7 +49,7 @@ module.exports = function(client, from, to, text, message) {
     return results;
   }
 
-  needle.get('http://stackoverflow.com/search?q='+querystring.escape(q), defaultHeaders, function(error, response, body) {
+  needle.get('http://en.wikipedia.org/w/index.php?title=Special%3ASearch&profile=default&search='+querystring.escape(q)+'&fulltext=Search', defaultHeaders, function(error, response, body) {
     var results = parseString(body);
 
     var sendTo = from; // send privately
@@ -58,14 +58,16 @@ module.exports = function(client, from, to, text, message) {
     }
 
     client.say(sendTo,
-      'Here are the top 3 Stackoverflow results for the search "'+q+'": '
+      'Here are the top 3 Wikipedia results for the search "'+q+'": '
       +'\n1: '+results[0].URL
       +'\n2: '+results[1].URL
       +'\n3: '+results[2].URL
-      +'\nMore results at: http://stackoverflow.com/search?q='+querystring.escape(q)
+      +'\nMore results at: http://en.wikipedia.org/w/index.php?title=Special%3ASearch&profile=default&search='+querystring.escape(q)+'&fulltext=Search'
       );
 
   });
 
 };
+
+
 
