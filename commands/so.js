@@ -1,5 +1,5 @@
 /*
- * Google command
+ * Stackoverflow command
  * -----------------------------------------------------------------------------
  * mostly stolen from https://www.npmjs.org/package/google-search-parser-4hype
  *
@@ -15,7 +15,7 @@ module.exports = function(client, from, to, text, message) {
   var q = text.split(/ (.+)/)[1];
 
   if (!q || q.length == 0) {
-    return 'No keyword given, can\'t really do a Google search with that. Try \'!google Jaloviina\'';
+    return 'No keyword given, can\'t really do a Stackoverflow search with that. Try \'!stackoverflow NodeJS\'';
   }
 
   defaultHeaders = {
@@ -33,13 +33,13 @@ module.exports = function(client, from, to, text, message) {
     var $ = this.$ = cheerio.load(string);
     var results = [];
 
-    $('.g').each(function(i, el) {
+    $('.search-result').each(function(i, el) {
 
       el = $(el);
 
       var row = {
-        Title: el.find('.l').text(),
-        URL: el.find('.l').attr('href')
+        Title: el.find('.result-link a').text(),
+        URL: 'http://stackoverflow.com'+el.find('.result-link a').attr('href')
       };
 
       results.push(row);
@@ -49,7 +49,7 @@ module.exports = function(client, from, to, text, message) {
     return results;
   }
 
-  needle.get('http://www.google.com/custom?q='+querystring.escape(q), defaultHeaders, function(error, response, body) {
+  needle.get('http://stackoverflow.com/search?q='+querystring.escape(q), defaultHeaders, function(error, response, body) {
     var results = parseString(body);
 
     var sendTo = from; // send privately
@@ -58,11 +58,11 @@ module.exports = function(client, from, to, text, message) {
     }
 
     client.say(sendTo,
-      'Here are the top 3 Google results for the search "'+q+'": '
+      'Here are the top 3 Stackoverflow results for the search "'+q+'": '
       +'\n1: '+results[0].URL
       +'\n2: '+results[1].URL
       +'\n3: '+results[2].URL
-      +'\nMore results at: http://www.google.com/search?q='+querystring.escape(q)
+      +'\nMore results at: http://stackoverflow.com/search?q='+querystring.escape(q)
       );
 
   });
