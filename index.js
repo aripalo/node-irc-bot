@@ -37,6 +37,34 @@ function buildHelpString() {
  * Helper to check if "someone" is actually a bot admin
  * -----------------------------------------------------------------------------
  */
+function beginsWithChannelName(string) {
+
+  var channelPrefixes = config.channelPrefixes.split('');
+
+  //console.log(channelPrefixes);
+
+  //channelPrefixes.forEach(function(element, index, array) {
+  //  array[index] = '\\'+element;
+  //});
+
+  //channelPrefixes.join("|");
+
+  //if (new RegExp(channelPrefixes).test(lowerCasedText)) {}
+
+  //if (to.indexOf('#') > -1) {}
+
+  return channelPrefixes.some(function(value) { return string.trim().indexOf(value) == 0; });
+
+
+
+}
+
+
+
+/*
+ * Helper to check if "someone" is actually a bot admin
+ * -----------------------------------------------------------------------------
+ */
 function isAdmin(someone) {
 
   if (Array.isArray(config.admins) && config.admins.some(function(value) { return someone.indexOf(value) >= 0; })) {
@@ -122,22 +150,34 @@ function clearModuleCaches() {
 function commandHandler(client, from, to, text, message) {
   if (text && text.length > 2 && text[0] == '!') {
     var sendTo = from; // send privately
-    var channel = "";
-    if (to.indexOf('#') > -1) {
+
+    if (beginsWithChannelName(to)) {
       sendTo = to; // send publicly
-      channel = sendTo;
     }
 
-    var command = String(text.split(' ')[0]).replace('!', '');
+    var command = String(text.split(' ')[0]).replace('!', '').trim();
+    var argument = text.substring(String(text.split(' ')[0]).length);
 
     if (command.trim() == 'say') {
 
       if (isAdmin(message.prefix)) {
-        if (text.split(' ')[1].indexOf('#') > -1) {
-          client.say(text.split(' ')[1], text.substring(String(text.split(' ')[0]).length + 1 + String(text.split(' ')[1]).length) );
+
+        var message = argument.substring( String(argument.trim().split(' ')[0]).length+1 ).trim();
+
+        console.log('substring argument: '+String(argument.trim().split(' ')[0]));
+        console.log('sendTo: '+sendTo);
+        console.log('argument: '+argument);
+        console.log('substring: '+ message);
+
+        if (beginsWithChannelName(argument)) {
+          console.log('menee trueen');
+          client.say(sendTo, message);
+
         } else {
-          client.say(channel, text.substring(String(text.split(' ')[0]).length));
+          console.log('menee falseen');
+          client.say(sendTo, argument);
         }
+
       }
 
     } else if (command.trim() == 'part') {
@@ -145,7 +185,7 @@ function commandHandler(client, from, to, text, message) {
         if (text.split(' ')[1] != undefined && text.split(' ')[1].indexOf('#') > -1) {
           client.part(text.split(' ')[1]);
         } else {
-          client.part(channel);
+          client.part(sendTo);
         }
       }
 
@@ -199,7 +239,7 @@ function observerHandler(client, from, to, text, message) {
 
   if (text && text.length > 2 && text[0] != '!') {
     var sendTo = from; // send privately
-    if (to.indexOf('#') > -1) {
+    if (beginsWithChannelName(to)) {
       sendTo = to; // send publicly
     }
 
