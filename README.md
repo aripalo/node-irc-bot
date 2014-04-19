@@ -77,5 +77,6 @@ TODO
 - `!google`, `!so` and `!wiki`-commands share quite much logic, maybe refactor that logic into separate module etc?
 - Improve docs
 - Add another observer example
+- There's quite many synchronous functions in the code, consider refactoring to asynchronous
 - Add "spam-protection", basically a timeout for non-bot-admin users
 - After everything's cleaned up and so, consider bundling as npm module
