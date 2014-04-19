@@ -1,7 +1,8 @@
 IRCbot with node
 ================
 
-**WORK IN PROGRESS!!!**
+**Word of warning:**
+It should work, but I hacked this thing together on a friday night. The code is s**t. Needs some refactoring, but even more than that, I need to sleep.
 
 Built on top of [Node-IRC](https://github.com/martynsmith/node-irc)-module.
 
