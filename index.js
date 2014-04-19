@@ -121,8 +121,8 @@ function clearModuleCaches() {
   // build the help string again
   buildHelpString();
 
-  // returns a message for the IRC bot to send to the admin user who called !reload
-  return 'Commands, observeres, greeting lists and auto-op lists are now reloaded!';
+  // a message for the IRC bot to send to the admin user who called !reload
+  return 'Commands, observeres, greetings & auto-op lists are now reloaded!';
 
 };
 
@@ -136,76 +136,100 @@ function clearModuleCaches() {
  * TODO: SERIOUSLY refactor this awfullness!
  */
 function commandHandler(client, from, to, text, message) {
+
   if (text && text.length > 2 && text[0] == '!') {
+
+    var command = String(text.split(' ')[0]).replace('!', '').trim();
+    var argument = text.substring(String(text.split(' ')[0]).length);
+    var messageToSend = "";
     var sendTo = from; // send privately
 
     if (beginsWithChannelName(to)) {
       sendTo = to; // send publicly
     }
 
-    var command = String(text.split(' ')[0]).replace('!', '').trim();
-    var argument = text.substring(String(text.split(' ')[0]).length);
-    var messageToSend = "";
-
-    if (command.trim() == 'say') {
-
-      if (isAdmin(message.prefix)) {
-
-        if (beginsWithChannelName(argument)) {
-          messageToSend = argument.substring( String(argument.trim().split(' ')[0]).length+1 ).trim();
-        } else {
-          messageToSend = argument;
+    function externalCommand(command) {
+      if (fs.existsSync('./commands/' + command + '.js')) { // check if we have an command file
+        var output = require('./commands/' + command + '.js')(client, from, to, text, message);
+        if (output) {
+          client.say(sendTo, output);
         }
-        client.say(sendTo, messageToSend);
-
+      } else {
+        client.say(sendTo, 'unknown command');
       }
+    };
 
-    } else if (command.trim() == 'part') {
-      if (isAdmin(message.prefix)) {
-        if (text.split(' ')[1] != undefined && text.split(' ')[1].indexOf('#') > -1) {
-          client.part(text.split(' ')[1]);
-        } else {
-          client.part(sendTo);
+    var internalCommand = {
+      'join': function() {
+        if (isAdmin(message.prefix)) {
+          client.join(argument);
         }
+      },
+      'part': function() {
+        if (isAdmin(message.prefix)) {
+          if (text.split(' ')[1] != undefined && text.split(' ')[1].indexOf('#') > -1) {
+            client.part(text.split(' ')[1]);
+          } else {
+            client.part(sendTo);
+          }
+        }
+      },
+      'kick': function() {
+
+      },
+      'ban': function() {
+
+      },
+      'say': function() {
+        if (isAdmin(message.prefix)) {
+          if (beginsWithChannelName(argument)) {
+            messageToSend = argument.substring( String(argument.trim().split(' ')[0]).length+1 ).trim();
+          } else {
+            messageToSend = argument;
+          }
+          client.say(sendTo, messageToSend);
+        }
+      },
+      'topic': function() {
+
+      },
+      'op': function() {
+
+      },
+      'deop': function() {
+
+      },
+      'mode': function() {
+        if (isAdmin(message.prefix)) {
+          client.send('MODE', String(text.split(' ')[1]), String(text.split(' ')[2]), String(text.split(' ')[3]));
+        }
+      },
+      'quit': function() {
+        if (isAdmin(message.prefix)) {
+          client.disconnect("As you wish m'lord!", function(){
+            process.exit();
+          });
+        } else {
+          client.say(sendTo, 'Sorry mate, only bot admin can do that!');
+        }
+      },
+      'reload': function() {
+        if (isAdmin(message.prefix)) {
+          client.say(sendTo, clearModuleCaches());
+        } else {
+          client.say(sendTo, 'Sorry mate, only bot admin can do that!');
+        }
+      },
+      'help': function() {
+        client.say(sendTo, helpString);
       }
+    };
 
-    } else if (command.trim() == 'join') {
-      if (isAdmin(message.prefix)) {
-        client.join(text.split(' ')[1]);
-      }
-    } else if (command.trim() == 'mode') {
-      if (isAdmin(message.prefix)) {
-        client.send('MODE', String(text.split(' ')[1]), String(text.split(' ')[2]), String(text.split(' ')[3]));
-      }
-    } else if (command.trim() == 'help') {
-
-      client.say(sendTo, helpString);
-
-    } else if (command.trim() == 'reload') {
-
-      if (isAdmin(message.prefix)) {
-        client.say(sendTo, clearModuleCaches());
-      } else {
-        client.say(sendTo, 'Sorry mate, only bot admin can do that!');
-      }
-
-    } else if (command.trim() == "quit") {
-
-      if (isAdmin(message.prefix)) {
-        client.disconnect("As you wish m'lord!", function(){
-          process.exit();
-        });
-      } else {
-        client.say(sendTo, 'Sorry mate, only bot admin can do that!');
-      }
-
-    } else if (fs.existsSync('./commands/' + command + '.js')) { // check if we have an command file
-      var output = require('./commands/' + command + '.js')(client, from, to, text, message);
-      if (output) {
-        client.say(sendTo, output);
-      }
+    // first test if we have an internal/core command for it, it not try external
+    if (typeof internalCommand[command]  === 'function') {
+      internalCommand[command]();
     } else {
-      client.say(sendTo, 'unknown command');
+      externalCommand(command);
     }
   }
 };
