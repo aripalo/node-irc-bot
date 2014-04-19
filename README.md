@@ -71,7 +71,11 @@ Adding functionality
 
 TODO
 ----
+- Better channel name handling (now doesn't work with e.g. !channel)
 - Refactor `index.js`, especially the `commandHandler` function
+- Create separate `!op`, `!deop` and `!ban` convenience methods (ppl don't like typing `!mode ...`)
 - `!google`, `!so` and `!wiki`-commands share quite much logic, maybe refactor that logic into separate module etc?
 - Improve docs
 - Add another observer example
+- Add "spam-protection", basically a timeout for non-bot-admin users
+- After everything's cleaned up and so, consider bundling as npm module
