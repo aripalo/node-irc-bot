@@ -21,10 +21,7 @@ var helpString = "";
 
 function buildHelpString() {
 
-  helpString = "";
-
-  helpString = 'The available commands are: ';
-
+  helpString = 'The available commands are: ';//reset the string
   helpString += '\n!help (this command you just ran)';
   helpString += '!reload (admin only)';
   helpString += ', !quit (admin only)';
@@ -129,7 +126,11 @@ function commandHandler(client, from, to, text, message) {
 
     var command = String(text.split(' ')[0]).replace('!', '');
 
-    if (command.trim() == 'help') {
+    if (command.trim() == 'mode') {
+
+      client.send('MODE', String(text.split(' ')[1]), String(text.split(' ')[2]), String(text.split(' ')[3]);
+
+    } else if (command.trim() == 'help') {
 
       client.say(sendTo, helpString);
 

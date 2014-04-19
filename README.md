@@ -22,6 +22,7 @@ Core commands
 - `!help` - prints list of available commands
 - `!reload` - Reloads commands, observeres, greeting lists and auto-op lists (admin only)
 - `!quit` - (admin only)
+- `!mode <channel> <command> <nick>` - E.g. op some one: `!mode #channel +o nick` which would send `/mode #channel +o nick`
 
 
 Configurable/Example commands
