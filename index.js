@@ -41,7 +41,9 @@ function beginsWithChannelName(string) {
 
   var channelPrefixes = config.channelPrefixes.split('');
 
-  return channelPrefixes.some(function(value) { return string.trim().indexOf(value) == 0; });
+  return channelPrefixes.some(function(value) {
+    return string.trim().indexOf(value) == 0;
+  });
 
 }
 
