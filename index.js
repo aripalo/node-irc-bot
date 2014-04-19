@@ -116,6 +116,8 @@ function clearModuleCaches() {
  * -----------------------------------------------------------------------------
  * stolen from:
  * http://fahad19.tumblr.com/post/39920378753/running-an-irc-bot-with-nodejs-locally
+ *
+ * TODO: Seriosly, refactor this awfullness!
  */
 function commandHandler(client, from, to, text, message) {
   if (text && text.length > 2 && text[0] == '!') {
