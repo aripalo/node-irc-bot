@@ -159,7 +159,8 @@ module.exports = function(client, from, to, text, message) {
    * ---------------------------------------------------------------------------
    */
   internalCommand.help = function(opts) {
-    client.say(sendTo, help.string);
+    console.log(sendTo);
+    client.say(sendTo, help.toString());
   };
 
   /*
