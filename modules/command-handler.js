@@ -68,7 +68,9 @@ module.exports = function(client, from, to, text, message) {
    * ---------------------------------------------------------------------------
    */
   internalCommand.kick = function(opts) {
-    client.send('KICK', sendTo, opts.argument.split(' ')[0], opts.argument.split(' ')[1] || '');
+    if (isAdmin(message.prefix)) {
+      client.send('KICK', sendTo, opts.argument.split(' ')[0], opts.argument.split(' ')[1] || '');
+    }
   };
 
   /*
@@ -76,7 +78,9 @@ module.exports = function(client, from, to, text, message) {
    * ---------------------------------------------------------------------------
    */
   internalCommand.ban = function(opts) {
-    client.send('MODE', sendTo, '+b', opts.argument);
+    if (isAdmin(message.prefix)) {
+      client.send('MODE', sendTo, '+b', opts.argument);
+    }
   };
 
   /*
@@ -84,7 +88,9 @@ module.exports = function(client, from, to, text, message) {
    * ---------------------------------------------------------------------------
    */
   internalCommand.unban = function(opts) {
-    client.send('MODE', sendTo, '-b', opts.argument);
+    if (isAdmin(message.prefix)) {
+      client.send('MODE', sendTo, '-b', opts.argument);
+    }
   };
 
   /*
@@ -107,7 +113,7 @@ module.exports = function(client, from, to, text, message) {
    * ---------------------------------------------------------------------------
    */
   internalCommand.topic = function(opts) {
-    if (opts.argument.length > 0) {
+    if (isAdmin(message.prefix) && opts.argument.length > 0) {
       client.send('TOPIC', sendTo, opts.argument);
     }
   };
@@ -117,7 +123,9 @@ module.exports = function(client, from, to, text, message) {
    * ---------------------------------------------------------------------------
    */
   internalCommand.op = function(opts) {
-    client.send('MODE', sendTo, '+o', opts.argument);
+    if (isAdmin(message.prefix)) {
+      client.send('MODE', sendTo, '+o', opts.argument);
+    }
   };
 
   /*
@@ -125,8 +133,9 @@ module.exports = function(client, from, to, text, message) {
    * ---------------------------------------------------------------------------
    */
   internalCommand.deop = function(opts) {
-    console.log(opts.argument);
-    client.send('MODE', sendTo, '-o', opts.argument);
+    if (isAdmin(message.prefix)) {
+      client.send('MODE', sendTo, '-o', opts.argument);
+    }
   };
 
   /*
@@ -170,7 +179,6 @@ module.exports = function(client, from, to, text, message) {
    * ---------------------------------------------------------------------------
    */
   internalCommand.help = function(opts) {
-    console.log(sendTo);
     client.say(sendTo, help.toString());
   };
 
