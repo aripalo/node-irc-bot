@@ -88,3 +88,4 @@ TODO
 - Unit tests?
 - Add "spam-protection", basically a timeout for non-bot-admin users
 - After everything's cleaned up and so, consider bundling as npm module
+- Error messages to IRC commands: such as "missing argument etc"
