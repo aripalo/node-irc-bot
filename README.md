@@ -84,6 +84,7 @@ TODO
 - **Features**
   - Add "spam-protection", basically a timeout for non-bot-admin users
   - Error messages to IRC commands: such as "missing argument etc"
+  - URL "resolver": When an URL is pasted on a channel, the bot should fetch the title of the page (especially useful for youtube links)
 - **Docs/Examples**
   - Improve docs
   - Add another observer example
