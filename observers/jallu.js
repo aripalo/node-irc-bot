@@ -1,7 +1,7 @@
 /*
  * Jallu-observer
  * -----------------------------------------------------------------------------
- * Notices when people are talking about "jallu", the great liquour from Finland,
+ * Notices when people are talking about "jallu", the great liquor from Finland,
  * cut brandy: http://en.wikipedia.org/wiki/Cut_brandy
  *
  */

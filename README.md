@@ -50,6 +50,15 @@ Found in `./commands`-folder.
 - `!so` -  returns links to top 3 stackoverflow results
 
 
+(message) Observers
+-------------------
+
+These are the fun things!
+
+- URL: When an (http/https) URL is pasted into a channel, the bot will fetch the URL and display the page title (great for youtube links especially)
+- Jallu: When someone mentions "jallu", the great liquor from Finland, also known as ['cut brandy'](http://en.wikipedia.org/wiki/Cut_brandy) the bot will make a wise remark!
+
+
 
 Install
 -------
