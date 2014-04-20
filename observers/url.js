@@ -32,7 +32,7 @@ module.exports = function(client, from, to, text, message) {
   function parseString(string) {
 
     var $ = this.$ = cheerio.load(string);
-    var title = $('title').text();
+    var title = $('title').text().trim();
 
     return title;
   }
