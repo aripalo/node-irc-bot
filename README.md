@@ -79,7 +79,6 @@ Adding functionality
 
 TODO
 ----
-- Better channel name handling (now doesn't work e.g. with exclamation mark channel syntax: `!channel`)
 - Refactor the `commandHandler` module
 - `!google`, `!so` and `!wiki`-commands share quite much logic, maybe refactor that logic into separate module etc?
 - Improve docs
