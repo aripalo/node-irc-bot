@@ -73,7 +73,6 @@ TODO
 ----
 - Better channel name handling (now doesn't work e.g. with exclamation mark channel syntax: `!channel`)
 - Refactor the `commandHandler` module
-- Create separate `!op`, `!deop` and `!ban` convenience methods (ppl don't like typing `!mode ...`)
 - `!google`, `!so` and `!wiki`-commands share quite much logic, maybe refactor that logic into separate module etc?
 - Improve docs
 - Add another observer example
