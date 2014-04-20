@@ -103,11 +103,13 @@ module.exports = function(client, from, to, text, message) {
   };
 
   /*
-   * Standard IRC /topic setter/getter
+   * Standard IRC /topic setter
    * ---------------------------------------------------------------------------
    */
   internalCommand.topic = function(opts) {
-    // TODO
+    if (opts.argument.length > 0) {
+      client.send('TOPIC', sendTo, opts.argument);
+    }
   };
 
   /*
