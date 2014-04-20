@@ -18,7 +18,7 @@ module.exports = function(client, from, to, text, message) {
 
   var opts = {
     command: String(text.split(' ')[0]).replace('!', '').trim(),
-    argument: text.substring(String(text.split(' ')[0]).length),
+    argument: text.substring(String(text.split(' ')[0]).length).trim(),
     messageToSend: ''
   }
 
@@ -107,7 +107,7 @@ module.exports = function(client, from, to, text, message) {
    * ---------------------------------------------------------------------------
    */
   internalCommand.op = function(opts) {
-    // TODO
+    client.send('MODE', sendTo, '+o', opts.argument);
   };
 
   /*
@@ -115,7 +115,8 @@ module.exports = function(client, from, to, text, message) {
    * ---------------------------------------------------------------------------
    */
   internalCommand.deop = function(opts) {
-    // TODO
+    console.log(opts.argument);
+    client.send('MODE', sendTo, '-o', opts.argument);
   };
 
   /*
