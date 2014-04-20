@@ -84,12 +84,19 @@ Adding functionality
 
 TODO
 ----
-- Refactor the `commandHandler` module
-- `!google`, `!so` and `!wiki`-commands share quite much logic, maybe refactor that logic into separate module etc?
-- Improve docs
-- Add another observer example
-- There's quite many synchronous functions in the code, consider refactoring to asynchronous
-- Unit tests?
-- Add "spam-protection", basically a timeout for non-bot-admin users
-- After everything's cleaned up and so, consider bundling as npm module
-- Error messages to IRC commands: such as "missing argument etc"
+
+- **Features**
+  - Add "spam-protection", basically a timeout for non-bot-admin users
+  - Error messages to IRC commands: such as "missing argument etc"
+- **Refactor**
+  - `!google`, `!so` and `!wiki`-commands share quite much logic, maybe refactor that logic into separate module etc?
+  - Refactor the `commandHandler` module
+  - There's quite many synchronous functions in the code, consider refactoring to asynchronous
+  - After everything's cleaned up and so, consider bundling as npm module
+  - Unit tests?
+- **Docs/Examples**
+  - Improve docs
+  - Add another observer example
+
+
+
