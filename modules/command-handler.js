@@ -144,7 +144,12 @@ module.exports = function(client, from, to, text, message) {
    */
   internalCommand.mode = function(opts) {
     if (isAdmin(message.prefix)) {
-      client.send('MODE', String(text.split(' ')[1]), String(text.split(' ')[2]), String(text.split(' ')[3]));
+      if (opts.argument.split(' ')[1] != undefined) {
+        client.send('MODE', sendTo, opts.argument.split(' ')[0], opts.argument.split(' ')[1]);
+      } else {
+        client.send('MODE', sendTo, opts.argument.split(' ')[0]);
+      }
+
     }
   };
 
