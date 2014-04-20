@@ -28,7 +28,7 @@ IRC commands
 
 *Admin only.*
 
-The usage of the bot mostly requires the admin to be on the same IRC channel as the bot.
+The usage of the bot mostly requires the admin to be on the same IRC channel as the bot. Commands work mostly the same way as their "native" IRC counterparts, meaning `!command` matches the IRC `/command`... mostly :)
 
 - `!join <channel>` or `!join <channel> <password>` if it has one
 - `!part` if on a channel or `!part <channel>` if called elsewhere
