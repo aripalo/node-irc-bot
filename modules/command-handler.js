@@ -68,7 +68,7 @@ module.exports = function(client, from, to, text, message) {
    * ---------------------------------------------------------------------------
    */
   internalCommand.kick = function(opts) {
-
+    // TODO
   };
 
   /*
@@ -76,7 +76,7 @@ module.exports = function(client, from, to, text, message) {
    * ---------------------------------------------------------------------------
    */
   internalCommand.ban = function(opts) {
-
+    // TODO
   };
 
   /*
@@ -99,7 +99,7 @@ module.exports = function(client, from, to, text, message) {
    * ---------------------------------------------------------------------------
    */
   internalCommand.topic = function(opts) {
-
+    // TODO
   };
 
   /*
@@ -107,7 +107,7 @@ module.exports = function(client, from, to, text, message) {
    * ---------------------------------------------------------------------------
    */
   internalCommand.op = function(opts) {
-
+    // TODO
   };
 
   /*
@@ -115,7 +115,7 @@ module.exports = function(client, from, to, text, message) {
    * ---------------------------------------------------------------------------
    */
   internalCommand.deop = function(opts) {
-
+    // TODO
   };
 
   /*
