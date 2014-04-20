@@ -29,6 +29,9 @@ Core commands
 
 IRC commands
 ------------
+
+Admin only.
+
 - `!join <channel>` or `!join <channel> <password>` if it has one
 - `!part` if on a channel or `!part <channel>` if called elsewhere
 - `!say <something>` if on a channel or `!say <channel> <something>` if called elsewhere
