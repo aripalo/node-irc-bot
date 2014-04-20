@@ -88,15 +88,15 @@ TODO
 - **Features**
   - Add "spam-protection", basically a timeout for non-bot-admin users
   - Error messages to IRC commands: such as "missing argument etc"
+- **Docs/Examples**
+  - Improve docs
+  - Add another observer example
 - **Refactor**
   - `!google`, `!so` and `!wiki`-commands share quite much logic, maybe refactor that logic into separate module etc?
   - Refactor the `commandHandler` module
   - There's quite many synchronous functions in the code, consider refactoring to asynchronous
   - After everything's cleaned up and so, consider bundling as npm module
   - Unit tests?
-- **Docs/Examples**
-  - Improve docs
-  - Add another observer example
 
 
 
