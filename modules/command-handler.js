@@ -68,7 +68,7 @@ module.exports = function(client, from, to, text, message) {
    * ---------------------------------------------------------------------------
    */
   internalCommand.kick = function(opts) {
-    // TODO
+    client.send('KICK', sendTo, opts.argument.split(' ')[0], opts.argument.split(' ')[1] || '');
   };
 
   /*
