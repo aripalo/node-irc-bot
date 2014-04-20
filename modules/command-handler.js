@@ -77,6 +77,18 @@ module.exports = function(client, from, to, text, message) {
    */
   internalCommand.ban = function(opts) {
     // TODO
+    // /MODE #demo +b *!*abcd@dialup*.provider.com
+    client.send('MODE', sendTo, '+b', opts.argument);
+  };
+
+  /*
+   * Convenience method for unbanning
+   * ---------------------------------------------------------------------------
+   */
+  internalCommand.unban = function(opts) {
+    // TODO
+    // /MODE #demo +b *!*abcd@dialup*.provider.com
+    client.send('MODE', sendTo, '-b', opts.argument);
   };
 
   /*
