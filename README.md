@@ -24,23 +24,25 @@ Features
 Core commands
 -------------
 - `!help` - prints list of available commands
-- `!reload` - Reloads commands, observeres, greeting lists and auto-op lists (admin only)
-- `!quit` - (admin only)
+- `!reload` - Reloads commands, observeres, greeting lists and auto-op lists *(admin only)*
+- `!quit` - *(admin only)*
 
 IRC commands
 ------------
 
-Admin only.
+*Admin only.*
+
+The usage of the bot mostly requires the admin to be on the same IRC channel as the bot.
 
 - `!join <channel>` or `!join <channel> <password>` if it has one
 - `!part` if on a channel or `!part <channel>` if called elsewhere
 - `!say <something>` if on a channel or `!say <channel> <something>` if called elsewhere
-- `!ban`
-- `!unban`
-- `!kick`
-- `!op`
-- `!deop`
-- `!mode <channel> <command> <nick>` - E.g. op some one: `!mode #channel +o nick` which would send `/mode #channel +o nick`
+- `!ban <someone>`
+- `!unban <someone>`
+- `!kick <someone>`
+- `!op <someone>`
+- `!deop <someone>`
+- `!mode <command>` or `!mode <command> <nick>`
 
 
 Configurable/Example commands
