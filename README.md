@@ -26,10 +26,18 @@ Core commands
 - `!help` - prints list of available commands
 - `!reload` - Reloads commands, observeres, greeting lists and auto-op lists (admin only)
 - `!quit` - (admin only)
-- `!mode <channel> <command> <nick>` - E.g. op some one: `!mode #channel +o nick` which would send `/mode #channel +o nick`
+
+IRC commands
+------------
 - `!join <channel>` or `!join <channel> <password>` if it has one
 - `!part` if on a channel or `!part <channel>` if called elsewhere
 - `!say <something>` if on a channel or `!say <channel> <something>` if called elsewhere
+- `!ban`
+- `!unban`
+- `!kick`
+- `!op`
+- `!deop`
+- `!mode <channel> <command> <nick>` - E.g. op some one: `!mode #channel +o nick` which would send `/mode #channel +o nick`
 
 
 Configurable/Example commands
