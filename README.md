@@ -1,7 +1,7 @@
 IRC bot made with NodeJS
 ========================
 
-Hacked this thing together during couple nights just for the fun of it. Built on top of [Node-IRC](https://github.com/martynsmith/node-irc)-module.
+Hacked this thing together just for the fun of it. Built on top of [Node-IRC](https://github.com/martynsmith/node-irc)-module.
 
 
 
