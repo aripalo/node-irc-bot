@@ -51,7 +51,7 @@ module.exports = function(client, from, to, text, message) {
     if (validUrl.isUri(url)){
       needle.get(url, options, function(error, response, body) {
 
-        if (!error && response.statusCode == 200) {
+        if (!error && response.statusCode == 200 && typeof body === 'string') {
           var title = parseString(body);
           var sendTo = from; // send privately
           if (isChannel(to)) {
