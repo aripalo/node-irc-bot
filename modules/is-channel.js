@@ -1,4 +1,4 @@
-var config  = require('../config.json');
+var config  = require('../config/config.json');
 
 /*
  * Helper to check if "someone" is actually a bot admin
