@@ -11,6 +11,7 @@ var help = require('./help.js');
  * will actually get the changed modules from the disk
  */
 module.exports = function() {
+  console.log("Reloading ...")
 
   // delete stuff from require.cache
   fs.readdirSync('./commands/').forEach(function (file) {
@@ -21,13 +22,23 @@ module.exports = function() {
     delete require.cache[require.resolve('../observers/'+file)];
   });
 
-  delete require.cache[require.resolve('../autoop.json')];
-  delete require.cache[require.resolve('../greetings.json')];
+  try {
+    delete require.cache[require.resolve('../autoop.json')];
+  }catch(e){
+    console.error("Reload: autoop.json not in cache")
+  }  
 
+  try {
+    delete require.cache[require.resolve('../greetings.json')];
+  }catch(e){
+    console.error("Reload: greeting.json not in cache")
+  }  
+ 
   // build the help string again
   help.buildString();
 
   // a message for the IRC bot to send to the admin user who called !reload
   return 'Commands, observeres, greetings & auto-op lists are now reloaded!';
 
+  console.log("Reloading done!")
 };
