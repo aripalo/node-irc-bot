@@ -8,9 +8,9 @@ function isInAutoop(channel, nick) {
 
   var autoop;
 
-  if (!fs.existsSync('../autoop.json')) { return false; }
+  if (!fs.existsSync('../config/autoop.json')) { return false; }
 
-  autoop  = require('../autoop.json');
+  autoop  = require('../config/autoop.json');
 
   if (autoop == undefined) { return false; }
 
@@ -30,7 +30,7 @@ function isInAutoop(channel, nick) {
 
 module.exports = function(client, channel, nick, message) {
 
-  // auto-op bot admin and optionally configured users on autoop.json
+  // auto-op bot admin and optionally configured users on config/autoop.json
   if (isAdmin(message.prefix) || isInAutoop(channel, nick)) {
     client.send('MODE', channel, '+o', nick);
   }
